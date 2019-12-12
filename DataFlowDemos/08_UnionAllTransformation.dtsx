@@ -1,0 +1,914 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/2/2019 9:41:12 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="G05USXN00548"
+  DTS:CreatorName="G05\pawatush"
+  DTS:DTSID="{A75BDFA7-8A27-45F3-86B7-86F6565076F9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="08_UnionAllTransformation"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{15285F34-83F0-49FB-859E-78E8346588CA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{0316FBF2-38AB-417F-BC85-5868B6BF1BD9}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Projects\SSIS\Outputs\UnionAll.xls;Extended Properties=&quot;Excel 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.Ford_NGDC_PROD]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F8188573-1C78-46D5-80C9-12D8CFD6B3F1}"
+      DTS:ObjectName="LocalHost.Ford_NGDC_PROD">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Ford_NGDC_PROD;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{08C9DC2B-169A-4F2D-83D7-3F5D3E0B5273}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Excel Destination"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Excel Destination"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Excel_Destination</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Excel Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[LandingZoneName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LandingZoneName"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[LandingZoneName]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[LandingZoneScore]"
+                      cachedDataType="r8"
+                      cachedName="LandingZoneScore"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[LandingZoneScore]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneScore]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[LandingZoneDesc]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="LandingZoneDesc"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[LandingZoneDesc]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneDesc]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[LandingZone]"
+                      dataType="nText"
+                      name="LandingZone" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[LandingZoneName]"
+                      dataType="nText"
+                      name="LandingZoneName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[LandingZoneDesc]"
+                      dataType="nText"
+                      name="LandingZoneDesc" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[LandingZoneScore]"
+                      dataType="r8"
+                      name="LandingZoneScore" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[LandingZoneMaster]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Ford_NGDC_PROD]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Ford_NGDC_PROD]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZone]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LandingZone]"
+                      length="20"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZone]"
+                      name="LandingZone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZoneName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneName]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZoneName]"
+                      name="LandingZoneName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZoneDesc]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneDesc]"
+                      length="500"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZoneDesc]"
+                      name="LandingZoneDesc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZoneScore]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneScore]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZoneScore]"
+                      name="LandingZoneScore"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      dataType="i4"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LandingZone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="LandingZone" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LandingZoneName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneDesc]"
+                      dataType="wstr"
+                      length="500"
+                      name="LandingZoneDesc" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneScore]"
+                      dataType="r8"
+                      name="LandingZoneScore" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UpdatedDate]"
+                      dataType="dbDate"
+                      name="UpdatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UpdatedBy]"
+                      dataType="wstr"
+                      length="50"
+                      name="UpdatedBy" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LandingZone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LandingZone]"
+                      name="LandingZone" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LandingZoneName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LandingZoneName]"
+                      name="LandingZoneName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LandingZoneDesc]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LandingZoneDesc]"
+                      name="LandingZoneDesc" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LandingZoneScore]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LandingZoneScore]"
+                      name="LandingZoneScore" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Source 1"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source 1"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[TempLandingZoneMaster]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Source 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Ford_NGDC_PROD]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Ford_NGDC_PROD]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZone]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[LandingZone]"
+                      length="20"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZone]"
+                      name="LandingZone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZoneName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneName]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZoneName]"
+                      name="LandingZoneName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZoneDesc]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneDesc]"
+                      length="500"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZoneDesc]"
+                      name="LandingZoneDesc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZoneScore]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneScore]"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZoneScore]"
+                      name="LandingZoneScore"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      dataType="i4"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[LandingZone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="LandingZone" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LandingZoneName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneDesc]"
+                      dataType="wstr"
+                      length="500"
+                      name="LandingZoneDesc" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[LandingZoneScore]"
+                      dataType="r8"
+                      name="LandingZoneScore" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[UpdatedDate]"
+                      dataType="dbDate"
+                      name="UpdatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[UpdatedBy]"
+                      dataType="wstr"
+                      length="50"
+                      name="UpdatedBy" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[LandingZone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[LandingZone]"
+                      name="LandingZone" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[LandingZoneName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[LandingZoneName]"
+                      name="LandingZoneName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[LandingZoneDesc]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[LandingZoneDesc]"
+                      name="LandingZoneDesc" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[LandingZoneScore]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[LandingZoneScore]"
+                      name="LandingZoneScore" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[LandingZone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="LandingZone"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZone]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZone]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[LandingZoneName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LandingZoneName"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZoneName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[LandingZoneScore]"
+                      cachedDataType="r8"
+                      cachedName="LandingZoneScore"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZoneScore]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneScore]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[LandingZoneDesc]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="LandingZoneDesc"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LandingZoneDesc]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneDesc]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[LandingZone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="LandingZone"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZone]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZone]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[LandingZoneName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LandingZoneName"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZoneName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[LandingZoneScore]"
+                      cachedDataType="r8"
+                      cachedName="LandingZoneScore"
+                      lineageId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LandingZoneScore]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneScore]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZone]"
+                      name="LandingZone" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneName]"
+                      name="LandingZoneName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneDesc]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneDesc]"
+                      name="LandingZoneDesc" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneScore]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LandingZoneScore]"
+                      name="LandingZoneScore" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output1]"
+              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLE DB Source 1.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Union All Output 1]"
+              endId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]"
+              name="Union All Output 1"
+              startId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="152,42.6666666666667"
+          Id="Package\Data Flow Task"
+          TopLeft="81.6666654497385,43.7666658840577" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="45.7738088417266,21.5428567576408" />
+        <NodeLayout
+          Size="160,42.6666666666667"
+          Id="Package\Data Flow Task\OLE DB Source 1"
+          TopLeft="295.059519412794,24.5142852759362" />
+        <NodeLayout
+          Size="121.333333333334,42.6666666666667"
+          Id="Package\Data Flow Task\Union All"
+          TopLeft="191.071425724242,94.0952364126842" />
+        <NodeLayout
+          Size="160,42.6666666666667"
+          Id="Package\Data Flow Task\Excel Destination"
+          TopLeft="172.619045046823,191.285710865259" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Union All Output 1]"
+          TopLeft="252.178568718866,136.761903079351">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54.5238077859085"
+              Start="0,0"
+              End="0,47.0238077859085">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.0238077859085" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="121.10714217506,64.2095234243075">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="130.630950215849,29.8857129883767"
+              Start="0,0"
+              End="130.630950215849,22.3857129883767">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.9428564941883" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.9428564941883"
+                    Point2="0,14.9428564941883"
+                    Point3="4,14.9428564941883" />
+                  <mssgle:LineSegment
+                    End="126.630950215849,14.9428564941883" />
+                  <mssgle:CubicBezierSegment
+                    Point1="126.630950215849,14.9428564941883"
+                    Point2="130.630950215849,14.9428564941883"
+                    Point3="130.630950215849,18.9428564941883" />
+                  <mssgle:LineSegment
+                    End="130.630950215849,22.3857129883767" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output1]"
+          TopLeft="375.059519412794,67.1809519426028">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-104.432538132996,26.9142844700813"
+              Start="0,0"
+              End="-104.432538132996,19.4142844700813">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.9383940571198" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.9383940571198"
+                    Point2="0,15.9383940571198"
+                    Point3="-4,15.9383940571198" />
+                  <mssgle:LineSegment
+                    End="-100.432538132996,15.9383940571198" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-100.432538132996,15.9383940571198"
+                    Point2="-104.432538132996,15.9383940571198"
+                    Point3="-104.432538132996,19.9383940571198" />
+                  <mssgle:LineSegment
+                    End="-104.432538132996,19.4142844700813" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
